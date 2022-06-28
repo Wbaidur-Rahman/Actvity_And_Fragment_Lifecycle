@@ -31,6 +31,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     private var revenue = 0
     private var dessertsSold = 0
+    private lateinit var = dessertTimer : DessertTimer
 
     // Contains all the views
     private lateinit var binding: ActivityMainBinding
@@ -73,7 +74,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         binding.dessertButton.setOnClickListener {
             onDessertClicked()
         }
-
+        dessertTimer = DessertTimer(this.lifecycle)
         // Set the TextViews to the right values
         binding.revenue = revenue
         binding.amountSold = dessertsSold
@@ -151,7 +152,7 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     // TODO (02) Override the onStart lifecycle method and add an info level log statement
     override fun onStart() {
-        dessertsSold = 0
+        dessertTimer.startTimer()
         super.onStart()
         Timber.i("onStart Called")
     }
@@ -166,7 +167,13 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         Timber.i("onPause Called")
     }
     override  fun onStop() {
+        dessertTimer.stopTimer()
         super.onStop()
         Timber.i("onStop Called")
+    }
+
+    override  fun onDestroy() {
+        super.onDestroy()
+        Timber.i("onDestroy Called")
     }
 }
