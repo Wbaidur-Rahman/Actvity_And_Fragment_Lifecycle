@@ -28,6 +28,11 @@ import androidx.lifecycle.LifecycleObserver
 import com.example.android.dessertpusher.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), LifecycleObserver {
+    override fun onSaveInstanceState(outState: Bundle?){
+        super.onSaveInstanceState(outState)
+        outState.putInt("key_Revenue", revenue)
+        Timber.i("on to onsave called")
+    }
 
     private var revenue = 0
     private var dessertsSold = 0
@@ -76,6 +81,10 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
         }
         dessertTimer = DessertTimer(this.lifecycle)
         // Set the TextViews to the right values
+        if (savedInstanceState!=null){
+            savedInstanceState.getInt("key_revenue")
+        }
+
         binding.revenue = revenue
         binding.amountSold = dessertsSold
 
