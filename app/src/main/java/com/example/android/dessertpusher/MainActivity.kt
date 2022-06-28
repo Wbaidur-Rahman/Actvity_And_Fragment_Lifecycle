@@ -151,6 +151,22 @@ class MainActivity : AppCompatActivity(), LifecycleObserver {
 
     // TODO (02) Override the onStart lifecycle method and add an info level log statement
     override fun onStart() {
+        dessertsSold = 0
         super.onStart()
+        Timber.i("onStart Called")
+    }
+
+    override  fun onResume() {
+        super.onResume()
+        Timber.i("onResume Called")
+    }
+
+    override  fun onPause() {
+        super.onPause()
+        Timber.i("onPause Called")
+    }
+    override  fun onStop() {
+        super.onStop()
+        Timber.i("onStop Called")
     }
 }
